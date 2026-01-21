@@ -6,6 +6,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "start": "nuxt start",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts",
@@ -30,6 +31,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.0",
+    "sass": "^1.97.2",
     "typescript": "^5.9.3"
   },
   "lint-staged": {
@@ -37,8 +39,11 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{json,md,css}": [
+    "*.{json,md,css,scss}": [
       "prettier --write"
     ]
+  },
+  "resolutions": {
+    "eslint-import-resolver-typescript": "3.6.3"
   }
 }

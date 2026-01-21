@@ -1,0 +1,266 @@
+// ============================================
+// Utility Classes
+// ============================================
+// These complement Tailwind CSS with SCSS-specific utilities
+
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'functions' as *;
+
+// Display
+// --------------------------------------------
+.flex-center {
+  @include flex-center;
+}
+
+.flex-between {
+  @include flex-between;
+}
+
+.flex-start {
+  @include flex-start;
+}
+
+.flex-end {
+  @include flex-end;
+}
+
+.flex-column {
+  @include flex-column;
+}
+
+.flex-column-center {
+  @include flex-column-center;
+}
+
+// Text
+// --------------------------------------------
+.text-truncate {
+  @include text-truncate;
+}
+
+.text-clamp-2 {
+  @include text-clamp(2);
+}
+
+.text-clamp-3 {
+  @include text-clamp(3);
+}
+
+// Container
+// --------------------------------------------
+.container-custom {
+  @include container;
+}
+
+.container-sm {
+  @include container($breakpoint-sm);
+}
+
+.container-md {
+  @include container($breakpoint-md);
+}
+
+.container-lg {
+  @include container($breakpoint-lg);
+}
+
+// Cards
+// --------------------------------------------
+.card {
+  @include card;
+}
+
+.card-hover {
+  @include card-hover;
+}
+
+// Glass effect
+// --------------------------------------------
+.glass {
+  @include glass;
+}
+
+.glass-dark {
+  @include glass(0.2, 15px);
+  background: rgba($black, 0.3);
+}
+
+// Hover effects
+// --------------------------------------------
+.hover-lift {
+  @include hover-lift;
+}
+
+.hover-scale {
+  @include hover-scale;
+}
+
+// Custom scrollbar
+// --------------------------------------------
+.custom-scrollbar {
+  @include custom-scrollbar;
+}
+
+.custom-scrollbar-thin {
+  @include custom-scrollbar(4px);
+}
+
+// Gradients
+// --------------------------------------------
+.gradient-primary {
+  @include gradient-linear(to right, $primary, $primary-light);
+}
+
+.gradient-secondary {
+  @include gradient-linear(to right, $secondary, $secondary-light);
+}
+
+.gradient-accent {
+  @include gradient-linear(to right, $accent, $accent-light);
+}
+
+.gradient-sunset {
+  @include gradient-linear(135deg, #667eea, #764ba2);
+}
+
+.gradient-ocean {
+  @include gradient-linear(135deg, #2e3192, #1bffff);
+}
+
+.gradient-fire {
+  @include gradient-linear(135deg, #f093fb, #f5576c);
+}
+
+// Animations
+// --------------------------------------------
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// Animation classes
+// --------------------------------------------
+.animate-fade-in {
+  animation: fadeIn $transition-base;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp $transition-slow;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown $transition-slow;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft $transition-slow;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight $transition-slow;
+}
+
+.animate-scale-in {
+  animation: scaleIn $transition-base;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+// Backdrop blur
+// --------------------------------------------
+.backdrop-blur-sm {
+  @include backdrop-blur(4px);
+}
+
+.backdrop-blur {
+  @include backdrop-blur(10px);
+}
+
+.backdrop-blur-lg {
+  @include backdrop-blur(20px);
+}

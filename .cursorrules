@@ -1,0 +1,224 @@
+# Nuxt 3 Project Rules
+
+## Project Overview
+
+This is a Nuxt 3 project with TypeScript, Tailwind CSS, Pinia state management, ESLint, and Prettier.
+
+## Tech Stack
+
+- **Framework**: Nuxt 3
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS, SCSS
+- **State Management**: Pinia
+- **Linting**: ESLint with @nuxtjs/eslint-config-typescript
+- **Formatting**: Prettier
+- **Package Manager**: Yarn
+
+## Code Style & Formatting
+
+### General Rules
+
+- Use **2 spaces** for indentation (no tabs)
+- Use **single quotes** for strings
+- **No semicolons** at the end of statements
+- Use **trailing commas** in objects and arrays
+- Maximum line length: **80 characters**
+- Use **LF** line endings
+- Always include a final newline in files
+- Trim trailing whitespace (except in markdown files)
+
+### TypeScript
+
+- Prefer `const` over `let`, avoid `var`
+- Use explicit types for function parameters and return values
+- Use type inference where it improves readability
+- Prefer interfaces over type aliases for object shapes
+- Use optional chaining (`?.`) and nullish coalescing (`??`) operators
+- Avoid `any` type - use `unknown` if type is truly unknown
+
+### Vue/Nuxt Specific
+
+- Use **Composition API** with `<script setup>` syntax
+- Single-word component names are allowed (ESLint rule disabled)
+- Use `defineProps` and `defineEmits` for component props and events
+- Prefer `ref` and `reactive` for reactive state
+- Use `computed` for derived state
+- Use auto-imports provided by Nuxt (no need to import `ref`, `computed`, etc.)
+- Place composables in `/composables` directory
+- Place components in `/components` directory with auto-import enabled
+
+### File Naming Conventions
+
+- **Components**: PascalCase (e.g., `UserProfile.vue`, `NavBar.vue`)
+- **Pages**: kebab-case (e.g., `index.vue`, `about.vue`, `user-profile.vue`)
+- **Composables**: camelCase with `use` prefix (e.g., `useAuth.ts`, `useFetch.ts`)
+- **Stores**: camelCase (e.g., `counter.ts`, `userStore.ts`)
+- **Utils**: camelCase (e.g., `formatDate.ts`, `validators.ts`)
+- **Types**: PascalCase (e.g., `User.ts`, `ApiResponse.ts`)
+
+### Directory Structure
+
+```
+/
+├── .husky/              # Git hooks
+├── .nuxt/               # Auto-generated (gitignored)
+├── assets/              # Uncompiled assets (CSS, images, fonts)
+├── components/          # Vue components (auto-imported)
+├── composables/         # Composable functions (auto-imported)
+├── layouts/             # Layout components
+├── middleware/          # Route middleware
+├── pages/               # File-based routing
+├── plugins/             # Nuxt plugins
+├── public/              # Static files served at root
+├── server/              # Server-side code (API routes, middleware)
+├── stores/              # Pinia stores
+├── types/               # TypeScript type definitions
+└── utils/               # Utility functions (auto-imported)
+```
+
+## Pinia State Management
+
+- Store files should be in `/stores` directory
+- Use `defineStore` with setup syntax
+- Export stores with `use` prefix (e.g., `useCounterStore`)
+- Keep stores focused on a single domain
+- Use getters for computed state
+- Use actions for async operations and mutations
+
+Example:
+
+```typescript
+export const useCounterStore = defineStore('counter', () => {
+  const count = ref(0)
+  const doubleCount = computed(() => count.value * 2)
+
+  function increment() {
+    count.value++
+  }
+
+  return { count, doubleCount, increment }
+})
+```
+
+## Tailwind CSS
+
+- Use Tailwind utility classes in templates
+- Create custom components for repeated patterns
+- Use `@apply` sparingly in CSS files
+- Prefer composition over custom CSS
+- Follow mobile-first responsive design
+- Use Tailwind's design tokens (colors, spacing, etc.)
+
+## SCSS & Styling Structure
+
+- **Location**: All component and page specific styles must be written in `.scss` files located in `/assets/scss/`.
+- **Naming Convention**: All directories and files within `/assets/scss/` MUST use **kebab-case** (lowercase with hyphens). This applies automatically even if the source Vue component uses PascalCase.
+- **Directory Mirroring**: The directory structure in `/assets/scss/` must strictly mirror the source file structure, converting all names to kebab-case.
+  - Components: `components/Global/Header.vue` → `/assets/scss/components/global/header.scss`
+  - Pages (Generic): `pages/AboutUs.vue` → `/assets/scss/pages/about-us.scss`
+  - Pages (Root/Index): `pages/index.vue` → `/assets/scss/pages/home/index.scss`
+- **Implementation**:
+  - Move styles out of `.vue` files.
+  - Link them using the `src` attribute in the `<style>` block. This DOES enable auto-injection of shared variables.
+  - Example:
+    ```vue
+    <style lang="scss" scoped src="~/assets/scss/components/my-component.scss"></style>
+    ```
+- **Resources**: Ensure variables, mixins, and functions are imported via `@use` at the top of new SCSS files if they are not globally auto-injected (check nuxt.config.ts).
+
+## API & Server Routes
+
+- Server routes go in `/server/api` directory
+- Use event handlers with `defineEventHandler`
+- Return typed responses
+- Handle errors appropriately
+- Use middleware for common logic (auth, validation)
+
+## Environment Variables
+
+- Store sensitive data in `.env` (gitignored)
+- Provide `.env.example` with dummy values
+- Access runtime config via `useRuntimeConfig()`
+- Prefix public variables with `NUXT_PUBLIC_`
+
+## Git & Version Control
+
+- Use conventional commits (feat, fix, docs, style, refactor, test, chore)
+- Husky pre-commit hooks run lint-staged
+- All staged files are linted and formatted before commit
+- Keep commits atomic and focused
+
+## Testing (Future)
+
+- Place unit tests next to source files with `.spec.ts` or `.test.ts`
+- Place e2e tests in `/tests/e2e`
+- Use Vitest for unit testing
+- Use Playwright or Cypress for e2e testing
+
+## Performance Best Practices
+
+- Use `lazy` prefix for lazy-loaded components
+- Optimize images (use Nuxt Image module if needed)
+- Use `useFetch` and `useAsyncData` for data fetching
+- Implement proper caching strategies
+- Use `<ClientOnly>` for client-side only components
+- Minimize bundle size by tree-shaking and code splitting
+
+## Accessibility
+
+- Use semantic HTML elements
+- Include proper ARIA labels where needed
+- Ensure keyboard navigation works
+- Maintain proper heading hierarchy
+- Provide alt text for images
+- Ensure sufficient color contrast
+
+## Security
+
+- Sanitize user inputs
+- Use HTTPS in production
+- Implement CSRF protection
+- Validate data on both client and server
+- Keep dependencies updated
+- Never commit secrets or API keys
+
+## Code Review Checklist
+
+- [ ] Code follows style guide and passes linting
+- [ ] TypeScript types are properly defined
+- [ ] Components are properly structured with Composition API
+- [ ] No console.log statements in production code
+- [ ] Error handling is implemented
+- [ ] Code is DRY (Don't Repeat Yourself)
+- [ ] Performance considerations are addressed
+- [ ] Accessibility requirements are met
+- [ ] Tests are written (when applicable)
+
+## Commands Reference
+
+```bash
+# Development
+yarn dev                 # Start dev server
+
+# Building
+yarn build              # Build for production
+yarn generate           # Generate static site
+yarn preview            # Preview production build
+
+# Code Quality
+yarn lint               # Run ESLint
+yarn lint:fix           # Fix ESLint errors
+yarn prettier           # Format all files with Prettier
+
+# Dependencies
+yarn install            # Install dependencies
+yarn add <package>      # Add dependency
+yarn add -D <package>   # Add dev dependency
+```
+
+## Additional Notes
+
+- Always run `yarn lint:fix` and `yarn prettier` before committing
+- Use Nuxt DevTools for debugging and optimization
+- Refer to Nuxt 3 documentation for best practices
+- Keep dependencies up to date with security patches

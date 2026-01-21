@@ -1,0 +1,295 @@
+// ============================================
+// Base Styles
+// ============================================
+
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'functions' as *;
+
+// CSS Reset & Normalization
+// --------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  background-color: $bg-primary;
+  min-height: 100vh;
+}
+
+// Typography
+// --------------------------------------------
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-heading;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $text-primary;
+  margin-bottom: $spacing-4;
+}
+
+h1 {
+  font-size: $font-size-4xl;
+
+  @include md {
+    font-size: $font-size-5xl;
+  }
+}
+
+h2 {
+  font-size: $font-size-3xl;
+
+  @include md {
+    font-size: $font-size-4xl;
+  }
+}
+
+h3 {
+  font-size: $font-size-2xl;
+
+  @include md {
+    font-size: $font-size-3xl;
+  }
+}
+
+h4 {
+  font-size: $font-size-xl;
+
+  @include md {
+    font-size: $font-size-2xl;
+  }
+}
+
+h5 {
+  font-size: $font-size-lg;
+
+  @include md {
+    font-size: $font-size-xl;
+  }
+}
+
+h6 {
+  font-size: $font-size-base;
+
+  @include md {
+    font-size: $font-size-lg;
+  }
+}
+
+p {
+  margin-bottom: $spacing-4;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Links
+// --------------------------------------------
+a {
+  color: $primary;
+  text-decoration: none;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $primary-dark;
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// Lists
+// --------------------------------------------
+ul,
+ol {
+  margin-bottom: $spacing-4;
+  padding-left: $spacing-6;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+li {
+  margin-bottom: $spacing-2;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Images
+// --------------------------------------------
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Forms
+// --------------------------------------------
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+// Code
+// --------------------------------------------
+code,
+pre {
+  font-family: $font-family-mono;
+  font-size: $font-size-sm;
+}
+
+code {
+  padding: $spacing-1 $spacing-2;
+  background-color: $gray-100;
+  border-radius: $radius-base;
+  color: $error;
+}
+
+pre {
+  padding: $spacing-4;
+  background-color: $gray-900;
+  color: $white;
+  border-radius: $radius-lg;
+  overflow-x: auto;
+  margin-bottom: $spacing-4;
+
+  code {
+    padding: 0;
+    background-color: transparent;
+    color: inherit;
+  }
+}
+
+// Tables
+// --------------------------------------------
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: $spacing-4;
+}
+
+th,
+td {
+  padding: $spacing-3 $spacing-4;
+  text-align: left;
+  border-bottom: 1px solid $gray-200;
+}
+
+th {
+  font-weight: $font-weight-semibold;
+  background-color: $gray-50;
+}
+
+// Horizontal Rule
+// --------------------------------------------
+hr {
+  border: none;
+  border-top: 1px solid $gray-200;
+  margin: $spacing-8 0;
+}
+
+// Selection
+// --------------------------------------------
+::selection {
+  background-color: alpha($primary, 0.2);
+  color: $text-primary;
+}
+
+// Scrollbar
+// --------------------------------------------
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $gray-400;
+  border-radius: $radius-full;
+
+  &:hover {
+    background: $gray-500;
+  }
+}
+
+// Focus visible
+// --------------------------------------------
+:focus-visible {
+  outline: 2px solid $primary;
+  outline-offset: 2px;
+}
+
+// Accessibility
+// --------------------------------------------
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Skip to content link
+// --------------------------------------------
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: $primary;
+  color: $white;
+  padding: $spacing-3 $spacing-4;
+  text-decoration: none;
+  z-index: $z-index-tooltip;
+
+  &:focus {
+    top: 0;
+  }
+}

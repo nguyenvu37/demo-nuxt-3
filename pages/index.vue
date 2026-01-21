@@ -1,46 +1,71 @@
-<template>
-  <div>
-    <h1 class="text-3xl">Home {{ projectName }}</h1>
+<script lang="ts" setup>
+import wpImage from '~/assets/images/home/wp.webp'
 
-    <div class="mt-8 p-6 border rounded-lg shadow-sm">
-      <h2 class="text-2xl font-bold mb-4">Pinia Store Demo</h2>
-      <div class="flex items-center gap-4">
-        <button
-          class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-          @click="decrement()"
-        >
-          -
-        </button>
-        <span class="text-2xl font-mono">{{ count }}</span>
-        <button
-          class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
-          @click="increment()"
-        >
-          +
-        </button>
-        <button
-          class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-          @click="decrement"
-        >
-          -
-        </button>
-        <span class="text-2xl font-mono">{{ counter.count }}</span>
-        <button
-          class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
-          @click="increment"
-        >
-          +
-        </button>
+const { projectName } = useRuntimeConfig().public
+const counterStore = useCounterStore()
+const { decrement, increment } = counterStore
+
+useHead({
+  link: [
+    {
+      rel: 'preload',
+      as: 'image',
+      href: wpImage,
+      fetchpriority: 'high',
+    },
+  ],
+})
+</script>
+
+<template>
+  <div class="home-page">
+    <div class="hero-section">
+      <h1 class="hero-title">Home {{ projectName }}</h1>
+      <p class="hero-subtitle">Welcome to your Nuxt 3 project with SCSS!</p>
+    </div>
+
+    <div class="hero-banner flex items-center w-full justify-center mb-10">
+      <img
+        src="~/assets/images/home/wp.webp"
+        alt="banner"
+        width="860"
+        height="360"
+        fetchpriority="high"
+      />
+    </div>
+
+    <div class="demo-container">
+      <div class="demo-card">
+        <h2 class="demo-title">Pinia Store Demo</h2>
+        <div class="counter-controls">
+          <button class="btn btn-danger" @click="decrement()">-</button>
+          <span class="counter-display">{{ counterStore.count }}</span>
+          <button class="btn btn-success" @click="increment()">+</button>
+        </div>
+      </div>
+
+      <div class="demo-card glass-card">
+        <h2 class="demo-title">SCSS Features Demo</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">🎨</div>
+            <h3>Variables</h3>
+            <p>SCSS variables for consistent theming</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔧</div>
+            <h3>Mixins</h3>
+            <p>Reusable style patterns</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✨</div>
+            <h3>Functions</h3>
+            <p>Dynamic style calculations</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-const { projectName } = useRuntimeConfig().public
-const counter = useCounterStore()
-const { count, decrement, increment } = counter
-// const { count } = storeToRefs(counter);
-</script>
-
-<style></style>
+<style lang="scss" scoped src="~/assets/scss/pages/home/index.scss"></style>

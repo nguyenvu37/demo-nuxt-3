@@ -1,0 +1,93 @@
+// ============================================
+// SCSS Functions
+// ============================================
+
+// Convert pixels to rem
+// --------------------------------------------
+@function rem($pixels, $base: 16px) {
+  @return calc($pixels / $base) * 1rem;
+}
+
+// Convert pixels to em
+// --------------------------------------------
+@function em($pixels, $base: 16px) {
+  @return calc($pixels / $base) * 1em;
+}
+
+// Get spacing value
+// --------------------------------------------
+@function spacing($multiplier) {
+  @return $spacing-4 * $multiplier;
+}
+
+// Color manipulation
+// --------------------------------------------
+@function alpha($color, $opacity) {
+  @return rgba($color, $opacity);
+}
+
+// Map deep get - retrieve nested map values
+// --------------------------------------------
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// Strip units from a value
+// --------------------------------------------
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return calc($number / ($number * 0 + 1));
+  }
+  @return $number;
+}
+
+// Calculate contrast ratio
+// --------------------------------------------
+@function contrast-ratio($color1, $color2) {
+  $l1: luminance($color1);
+  $l2: luminance($color2);
+
+  @if $l1 > $l2 {
+    @return calc(($l1 + 0.05) / ($l2 + 0.05));
+  } @else {
+    @return calc(($l2 + 0.05) / ($l1 + 0.05));
+  }
+}
+
+// Calculate luminance
+// --------------------------------------------
+@function luminance($color) {
+  $red: red($color) / 255;
+  $green: green($color) / 255;
+  $blue: blue($color) / 255;
+
+  @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
+}
+
+// Get contrasting text color (black or white)
+// --------------------------------------------
+@function text-contrast($color) {
+  $light-contrast: contrast-ratio($color, $white);
+  $dark-contrast: contrast-ratio($color, $black);
+
+  @if $light-contrast > $dark-contrast {
+    @return $white;
+  } @else {
+    @return $black;
+  }
+}
+
+// Clamp value between min and max
+// --------------------------------------------
+@function clamp-value($value, $min, $max) {
+  @if $value < $min {
+    @return $min;
+  } @else if $value > $max {
+    @return $max;
+  } @else {
+    @return $value;
+  }
+}

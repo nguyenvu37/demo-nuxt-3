@@ -1,0 +1,54 @@
+// ============================================
+// Main SCSS Entry Point
+// ============================================
+// This file imports all SCSS modules using modern @use syntax
+
+// 1. Forward functions, variables, and mixins (makes them available to importers)
+@forward 'functions';
+@forward 'variables';
+@forward 'mixins';
+
+// 2. Use them locally for base and utilities
+@use 'functions' as *;
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// 3. Import base styles and utilities
+@use 'base';
+@use 'utilities';
+
+// ============================================
+// Custom Global Styles
+// ============================================
+// Add any additional global styles below
+
+// Example: Custom page transitions
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity $transition-base,
+    transform $transition-base;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+// Example: Layout wrapper
+.layout-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Example: Main content area
+.main-content {
+  flex: 1;
+  width: 100%;
+}
