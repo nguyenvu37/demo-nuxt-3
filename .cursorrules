@@ -46,15 +46,18 @@ This is a Nuxt 3 project with TypeScript, Tailwind CSS, Pinia state management, 
 - Use auto-imports provided by Nuxt (no need to import `ref`, `computed`, etc.)
 - Place composables in `/composables` directory
 - Place components in `/components` directory with auto-import enabled
+- **Storybook Requirement**: When creating a new component in `/components/base/*`, you MUST also create a corresponding `.stories.ts` file nearby.
 
 ### File Naming Conventions
 
-- **Components**: PascalCase (e.g., `UserProfile.vue`, `NavBar.vue`)
+- **Components**: kebab-case (e.g., `user-profile.vue`, `nav-bar.vue`)
 - **Pages**: kebab-case (e.g., `index.vue`, `about.vue`, `user-profile.vue`)
 - **Composables**: camelCase with `use` prefix (e.g., `useAuth.ts`, `useFetch.ts`)
 - **Stores**: camelCase (e.g., `counter.ts`, `userStore.ts`)
 - **Utils**: camelCase (e.g., `formatDate.ts`, `validators.ts`)
 - **Types**: PascalCase (e.g., `User.ts`, `ApiResponse.ts`)
+- **Stories**: kebab-case (e.g., `base-button.stories.ts`)
+- **Documentation**: kebab-case (e.g., `configure.mdx`)
 
 ### Directory Structure
 
@@ -114,7 +117,7 @@ export const useCounterStore = defineStore('counter', () => {
 - **Location**: All component and page specific styles must be written in `.scss` files located in `/assets/scss/`.
 - **Naming Convention**: All directories and files within `/assets/scss/` MUST use **kebab-case** (lowercase with hyphens). This applies automatically even if the source Vue component uses PascalCase.
 - **Directory Mirroring**: The directory structure in `/assets/scss/` must strictly mirror the source file structure, converting all names to kebab-case.
-  - Components: `components/Global/Header.vue` → `/assets/scss/components/global/header.scss`
+  - Components: `components/base/modal.vue` → `/assets/scss/components/base/modal.scss`
   - Pages (Generic): `pages/AboutUs.vue` → `/assets/scss/pages/about-us.scss`
   - Pages (Root/Index): `pages/index.vue` → `/assets/scss/pages/home/index.scss`
 - **Implementation**:
@@ -122,7 +125,11 @@ export const useCounterStore = defineStore('counter', () => {
   - Link them using the `src` attribute in the `<style>` block. This DOES enable auto-injection of shared variables.
   - Example:
     ```vue
-    <style lang="scss" scoped src="~/assets/scss/components/my-component.scss"></style>
+    <style
+      lang="scss"
+      scoped
+      src="~/assets/scss/components/my-component.scss"
+    ></style>
     ```
 - **Resources**: Ensure variables, mixins, and functions are imported via `@use` at the top of new SCSS files if they are not globally auto-injected (check nuxt.config.ts).
 

@@ -1,0 +1,83 @@
+.base-button {
+  @include button-base;
+
+  // Premium touches
+  font-family: $font-family-base;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+
+  // Variants
+  &--primary {
+    @include button-variant($primary, $white);
+    box-shadow: 0 4px 14px 0 rgba($primary, 0.39);
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 6px 20px rgba($primary, 0.23);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+      box-shadow: 0 2px 10px rgba($primary, 0.3);
+    }
+  }
+
+  &--secondary {
+    @include button-variant($secondary, $white);
+    box-shadow: 0 4px 14px 0 rgba($secondary, 0.39);
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 6px 20px rgba($secondary, 0.23);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+      box-shadow: 0 2px 10px rgba($secondary, 0.3);
+    }
+  }
+
+  &--danger {
+    @include button-variant($error, $white);
+    box-shadow: 0 4px 14px 0 rgba($error, 0.39);
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 6px 20px rgba($error, 0.23);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+      box-shadow: 0 2px 10px rgba($error, 0.3);
+    }
+  }
+
+  &--success {
+    @include button-variant($success, $white);
+    box-shadow: 0 4px 14px 0 rgba($success, 0.39);
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 6px 20px rgba($success, 0.23);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+      box-shadow: 0 2px 10px rgba($success, 0.3);
+    }
+  }
+
+  // Icon Only Mode
+  &--icon {
+    padding: 0;
+    width: $spacing-12; // 48px
+    height: $spacing-12;
+    border-radius: $radius-full;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-xl; // Larger text for icons/symbols
+  }
+}

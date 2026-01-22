@@ -1,4 +1,6 @@
 <script lang="ts" setup></script>
 <template>
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

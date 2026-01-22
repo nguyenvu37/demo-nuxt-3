@@ -5,6 +5,9 @@ const { projectName } = useRuntimeConfig().public
 const counterStore = useCounterStore()
 const { decrement, increment } = counterStore
 
+const isModalOpen = ref(false)
+const isModalOpenWelcome = ref(false)
+
 useHead({
   link: [
     {
@@ -38,9 +41,9 @@ useHead({
       <div class="demo-card">
         <h2 class="demo-title">Pinia Store Demo</h2>
         <div class="counter-controls">
-          <button class="btn btn-danger" @click="decrement()">-</button>
+          <BaseButton variant="danger" @click="decrement()">-</BaseButton>
           <span class="counter-display">{{ counterStore.count }}</span>
-          <button class="btn btn-success" @click="increment()">+</button>
+          <BaseButton variant="success" @click="increment()">+</BaseButton>
         </div>
       </div>
 
@@ -64,7 +67,25 @@ useHead({
           </div>
         </div>
       </div>
+      <div class="demo-card">
+        <h2 class="demo-title">Modal Component with click outside</h2>
+        <div class="flex items-center justify-center">
+          <BaseButton @click="isModalOpen = true">Open Modal</BaseButton>
+        </div>
+      </div>
+      <div class="demo-card">
+        <h2 class="demo-title">Modal Component without click outside</h2>
+        <div class="flex items-center justify-center">
+          <BaseButton @click="isModalOpenWelcome = true">Open Modal</BaseButton>
+        </div>
+      </div>
     </div>
+
+    <LazyModalsWelcome v-model="isModalOpen" />
+    <LazyModalsWelcome
+      v-model="isModalOpenWelcome"
+      :close-on-click-outside="false"
+    />
   </div>
 </template>
 

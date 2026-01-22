@@ -1,0 +1,92 @@
+// Modal SCSS
+.modal-backdrop {
+  @include fixed-full;
+  z-index: $z-index-modal-backdrop;
+  background-color: rgba($black, 0.4);
+  @include backdrop-blur(4px);
+  @include flex-center;
+
+  // Transitions
+  &.fade-enter-active,
+  &.fade-leave-active {
+    transition: opacity $transition-base;
+  }
+
+  &.fade-enter-from,
+  &.fade-leave-to {
+    opacity: 0;
+  }
+}
+
+.modal-container {
+  position: relative;
+  z-index: $z-index-modal;
+  width: 90%;
+  max-width: 500px;
+  background: $white;
+  border-radius: $radius-2xl;
+  box-shadow: $shadow-2xl;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  margin: $spacing-4;
+
+  // Premium touches
+  border: 1px solid rgba($white, 0.5);
+
+  // Transition for the modal content
+  transform-origin: center center;
+
+  &.scale-enter-active,
+  &.scale-leave-active {
+    transition: all $transition-base cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &.scale-enter-from,
+  &.scale-leave-to {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+}
+
+.modal-header {
+  @include flex-between;
+  padding: $spacing-6;
+  border-bottom: 1px solid $gray-100;
+
+  h3 {
+    @include heading($font-size-xl, $font-weight-bold);
+    margin: 0;
+  }
+}
+
+.modal-close {
+  @include reset-button;
+  @include flex-center;
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-full;
+  color: $text-secondary;
+  transition: all $transition-fast;
+
+  &:hover {
+    background-color: $gray-100;
+    color: $text-primary;
+  }
+}
+
+.modal-body {
+  padding: $spacing-6;
+  overflow-y: auto;
+  color: $text-secondary;
+  line-height: $line-height-relaxed;
+}
+
+.modal-footer {
+  @include flex-end;
+  gap: $spacing-3;
+  padding: $spacing-6;
+  background-color: $gray-50;
+  border-top: 1px solid $gray-100;
+  border-radius: 0 0 $radius-2xl $radius-2xl;
+}
