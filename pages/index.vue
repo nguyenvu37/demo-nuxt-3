@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import wpImage from '~/assets/images/home/wp.webp'
+import wpImage from '~/assets/images/home/cinnamoroll.jpg'
 
 const { projectName } = useRuntimeConfig().public
 const counterStore = useCounterStore()
@@ -28,11 +28,18 @@ useHead({
     </div>
 
     <div class="hero-banner flex items-center w-full justify-center mb-10">
-      <img
-        src="~/assets/images/home/wp.webp"
+      <!-- <img
+        src="~/assets/images/home/cinnamoroll.jpg"
         alt="banner"
-        width="860"
-        height="360"
+        width="1024"
+        height="576"
+      /> -->
+      <NuxtImg
+        format="webp"
+        src="~/assets/images/home/cinnamoroll.jpg"
+        alt="banner"
+        width="1024"
+        height="576"
         fetchpriority="high"
       />
     </div>
@@ -81,12 +88,13 @@ useHead({
       </div>
     </div>
 
-    <LazyModalsWelcome v-model="isModalOpen" />
+    <LazyModalsWelcome v-if="isModalOpen" v-model="isModalOpen" />
     <LazyModalsWelcome
+      v-if="isModalOpenWelcome"
       v-model="isModalOpenWelcome"
       :close-on-click-outside="false"
     />
   </div>
 </template>
 
-<style lang="scss" scoped src="~/assets/scss/pages/home/index.scss"></style>
+<style lang="scss" src="~/assets/scss/pages/home/index.scss"></style>

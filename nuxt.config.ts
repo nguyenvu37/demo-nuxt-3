@@ -2,9 +2,20 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@nuxtjs/storybook'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+    '@nuxtjs/storybook',
+    '@nuxt/image',
+  ],
 
-  // Global CSS
+  image: {
+    dir: 'assets',
+    alias: {
+      '~/assets': '.',
+    },
+  },
+
   css: ['~/assets/scss/main.scss'],
 
   // Vite configuration for SCSS
@@ -36,8 +47,6 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // The private keys which are only available within server-side
-    apiSecret: '123',
     // Keys within public, will be also exposed to the client-side
     public: {
       apiBase: '/api',
